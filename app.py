@@ -1,5 +1,5 @@
 from flask import Flask,render_template,url_for
-from forms import UploadForm
+from forms import RegistrationForm, LoginForm, UploadForm
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'ba75c255983c24387fc22ce96a71a507'
@@ -10,6 +10,19 @@ app.config['SECRET_KEY'] = 'ba75c255983c24387fc22ce96a71a507'
 def index():
     return render_template('index.html')
 
+
+#signup page
+@app.route('/register')
+def reg():
+    form = RegistrationForm()
+    return render_template('register.html', title = 'Register User', form = form)
+
+'''
+#login page
+@app.route('/login')
+def login():
+    return render_template('login.html', title = 'User Login', form = form)
+'''
 #form uploading page
 @app.route('/forms')
 def formupload():

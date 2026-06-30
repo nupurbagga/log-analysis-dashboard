@@ -1,15 +1,21 @@
+<!--homepage html file-->
+
+
 {% extends 'base.html' %}
-
-{% block head %}
-
-
-
-{% endblock %}
-
 
 {% block body %}
 
 <h1> Log Analysis Tool </h1>
 
+<h3>What we do?</h3>
+This tool helps organise web server files that were originally incomprehensible into useful information.
 
-{% endblock %}
+Get started or Log In to make use of the service now!
+
+<div>
+    Register Now! <a class="ml-2" href = " {{url_for('reg')}}"> Sign Up Now</a>
+</div>
+
+
+
+{% endblock body %}
