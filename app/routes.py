@@ -1,8 +1,9 @@
-from flask import Flask,render_template,url_for, flash, redirect
-from forms import RegistrationForm, LoginForm, UploadForm
-app = Flask(__name__)
+from flask import render_template,url_for, flash, redirect
+from app import app, db, bcrypt
+from flask_login import login_required
+from app.forms import RegistrationForm, LoginForm, UploadForm
 
-app.config['SECRET_KEY'] = 'ba75c255983c24387fc22ce96a71a507'
+from app.models import User, Logs
 
 #main page
 @app.route('/')
@@ -16,6 +17,10 @@ def index():
 def reg():
     form = RegistrationForm()
     if form.validate_on_submit():
+        hashed_pswd = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username = form.username.data, email = form.email.data, password = hashed_pswd)
+        db.session.add(user)
+        db.session.commit()
         flash(f'Account created for {form.username.data}!', category='success')
         return redirect(url_for('index'))
     return render_template('register.html', title = 'Register User', form = form)
@@ -31,11 +36,9 @@ def login():
     return render_template('login.html', title = 'User Login', form = form)
 
 '''
-#form uploading page
-@app.route('/forms')
-def formupload():
-    form = UploadForm()
-    return render_template('forms.html', title = 'Upload Form', form = form)'''
-
-if __name__ == '__main__':
-    app.run(debug=True)
+#dashboard
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    form = Dashboard()
+    return render_template('dashb.html', title = 'Dashboard Page', form = form)'''
