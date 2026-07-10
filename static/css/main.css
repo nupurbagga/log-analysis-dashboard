@@ -1,5 +1,88 @@
-body{
+p {
+    text-align: center;
+    color: black;
+}
 
-    width: 2;
-    font-family: sans-serif;
+html, body{
+    min-height: 100%;
+    background-color: #d2e0ff;
+}
+body{
+    color: #333333;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #321a6b;
+}
+
+.bg-steel{
+    background-color: #8cb1f5;
+}
+
+
+.btn-primary{
+    background: #7a67ee;
+    border: none;
+}
+
+.btn-primary:hover{
+    background: #6653dd;
+}
+
+.navbar{
+    background: #112375;
+    padding: 15px;
+}
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.navbar a:hover {
+    color: #6b5bd2;
+}
+
+
+.form-control{
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.form-control-label{
+    font-weight: bold;
+}
+
+legend{
+    text-align: center;
+    font-size: 2rem;
+    color: #4459b5;
+}
+
+.btn{
+    width: auto;
+    margin-top: 15px;
+}
+
+
+.auth-link{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.auth-link a{
+    color: #4459b5;
+    font-weight: bold;
+}
+
+
+.login-card, .reg-card{
+    background: white;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(91,72,163,.15);
 }
