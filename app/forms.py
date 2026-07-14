@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField,PasswordField, SelectField, SubmitField, BooleanField
+from wtforms import StringField,PasswordField, SelectField, SubmitField, BooleanField, ValidationError
 from wtforms.validators import DataRequired, Length, Email, EqualTo
+from app.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -14,6 +15,19 @@ class RegistrationForm(FlaskForm):
                         validators = [DataRequired(), EqualTo('password')])
     submit = SubmitField("Sign Up")
 
+    def validate_uname(self, username):
+
+        user = User.query.filter_by(username = username.data)
+
+        if user:
+            raise ValidationError('The username already exists')
+
+    def validate_email(self, email):
+
+        user = User.query.filter_by(email = email.data)
+
+        if user:
+            raise ValidationError('An account with that email exists. Try Loggin Inpi')
 
 class LoginForm(FlaskForm):
     email = StringField("Email address",
