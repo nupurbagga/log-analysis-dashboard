@@ -29,3 +29,5 @@ class Logs(db.Model):
     def __repr__(self):
         return f"Log('{self.filename}', '{self.upload_date}')"
     
+
+

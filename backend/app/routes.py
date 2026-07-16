@@ -4,7 +4,7 @@ from flask_login import login_required
 from app.forms import RegistrationForm, LoginForm, UploadForm
 from app.models import User, Logs
 from flask_login import login_user, current_user, logout_user, login_required
-
+from app.analysis import log_analysis
 
 #main page
 @app.route('/')
@@ -47,22 +47,26 @@ def login():
     return render_template('login.html', title = 'User Login', form = form)
 
 
-
+#logout
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
+#account access page
 @app.route('/account')
 @login_required
 def account():
     return render_template('account.html', title = 'Account')
 
-'''
-#dashboard
-@app.route('/dashboard')
+#dashboard page
+@app.route('/dashboard', methods = ['GET', 'POST'])
 @login_required
 def dashboard():
-    form = Dashboard()
-    return render_template('dashb.html', title = 'Dashboard Page', form = form)'''
+    form = UploadForm
+    if form.validate_on_submit:
+        file = form.log_file.data
+        contents = file.read().decode('utf-8')
+        results = log_analysis(contents)
+
+        #return render_template('dashboard.html', title = 'Dashboard Page', form = form)

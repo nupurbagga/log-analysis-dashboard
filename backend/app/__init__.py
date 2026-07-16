@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -12,7 +13,13 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 loginmngr = LoginManager(app)
-LoginManager.login_view = 'login'
+loginmngr.login_view = 'login'
 
+
+CORS(app, origins = ["http://localhost:5173"])
 
 from app import routes
+
+from app.api.auth import auth
+
+app.register_blueprint(auth, url_prefix="/api")
